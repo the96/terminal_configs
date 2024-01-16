@@ -1,0 +1,28 @@
+#!/bin/zsh
+
+alias ls="ls --color=auto -GF"
+alias rename=rename-v
+alias grep='grep --color=always'
+alias tailf='tail -F'
+
+# 指定した行 / 範囲のテキストを抽出する
+# 行数が増えると著しく遅くなるので注意
+alias pick='(){ sed -n "$1,$1p" $2 }'
+alias range='(){ sed -n "$1,`expr $1 + $2 - 1`p" $3 }'
+
+# 引数に渡した文字列をcamelize / decamelizeする
+alias camelize="perl -E 'use String::CamelCase qw/camelize/; say camelize \$_ for @ARGV'"
+alias decamelize="perl -E 'use String::CamelCase qw/decamelize/; say decamelize \$_ for @ARGV'"
+
+# パイプで渡した文字列をcamelize / decamelizeする
+# xargsは普通に使うとエイリアスが効かないのでそれ用
+alias pipecamel="perl -E 'use String::CamelCase qw/camelize/; while(<>) {print camelize \$_}'"
+alias pipedecamel="perl -E 'use String::CamelCase qw/decamelize/; while(<>) {print decamelize \$_}'"
+
+# よくあるやつ
+alias max='(){ if [ $1 -ge $2 ]; then echo $1; else echo $2; fi }'
+alias min='(){ if [ $1 -le $2 ]; then echo $1; else echo $2; fi }'
+
+# csvを見たいときに使うやつ
+alias lesscsv='sed ":a; s/,,/, ,/g; ta"| column -s, -t | less -N -S '
+alias tailcsv='() { head -n1 $1; tail $1 }'

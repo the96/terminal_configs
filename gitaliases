@@ -1,0 +1,16 @@
+[alias]
+    # チェックアウトの履歴を調べる
+    checkout-log = !"git reflog | rg 'checkout: moving from |Branch: renamed' | sed -E 's/^.+(checkout: moving from|Branch: renamed) //' | awk '{if(!branch[$NF]){print $NF; branch[$NF]=1}; if(!branch[$1]){print $1; branch[$1]=1}}' | xargs -I{} git branch --list {} | sed 's/** *//' | head -n 10"
+    checkout-log-unlimit = !"git reflog | rg 'checkout: moving from |Branch: renamed' | sed -E 's/^.+(checkout: moving from|Branch: renamed) //' | awk '{if(!branch[$NF]){print $NF; branch[$NF]=1}; if(!branch[$1]){print $1; branch[$1]=1}}' | xargs -I{} git branch --list {} | sed 's/** *//'"
+
+    # 現在のブランチを調べる
+    current = !git branch | awk '$1==\"*\"{print $2}'
+    # 一つ前のブランチを調べる
+    prev = !"git checkout-log | head -n 2 | tail -n 1"
+
+    # upstreamを打つのが面倒なときに使いがち
+    set-upstream = !git branch --set-upstream-to=origin/`git current`
+
+    # stashよりreset派
+    # stashだと掃除が面倒じゃないですか？
+    hard-reset = !"git add -A; git reset --hard"
