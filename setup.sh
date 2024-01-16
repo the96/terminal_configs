@@ -24,6 +24,10 @@ anyenv install rbenv
 anyenv install nodenv
 exec $SHELL -l
 
+echo '=== setup gh ==='
+brew install gh
+brew auth login
+
 echo '=== install docker and colima ==='
 brew install docker colima
 echo 'colima config file > $HOME/.colima/default/colima.yaml'
