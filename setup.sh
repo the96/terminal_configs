@@ -4,6 +4,9 @@ echo "source `pwd`/aliases" >> ~/.zshrc
 echo "[include]
 	path = `pwd`/gitaliases" >> ~/.gitconfig
 
+echo '=== setup rosetta ==='
+sudo softwareupdate --install-rosetta --agree-to-license
+
 echo '=== setup brew ==='
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 (echo; echo 'eval "$(/opt/homebrew/bin/brew shellenv)"') >> /Users/the96/.zprofile
