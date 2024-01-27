@@ -1,3 +1,5 @@
+[push]
+    default = upstream
 [alias]
     # チェックアウトの履歴を調べる
     checkout-log = !"git reflog | rg 'checkout: moving from |Branch: renamed' | sed -E 's/^.+(checkout: moving from|Branch: renamed) //' | awk '{if(!branch[$NF]){print $NF; branch[$NF]=1}; if(!branch[$1]){print $1; branch[$1]=1}}' | xargs -I{} git branch --list {} | sed 's/** *//' | head -n 10"

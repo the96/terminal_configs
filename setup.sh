@@ -2,7 +2,7 @@
 echo "source `pwd`/zshrc" >> ~/.zshrc
 echo "source `pwd`/aliases" >> ~/.zshrc
 echo "[include]
-	path = `pwd`/gitaliases" >> ~/.gitconfig
+	path = `pwd`/gitconfig" >> ~/.gitconfig
 
 echo '=== setup rosetta ==='
 sudo softwareupdate --install-rosetta --agree-to-license
@@ -20,6 +20,7 @@ echo '=== setup anyenv ==='
 brew install anyenv
 anyenv init
 anyenv install --init
+echo 'export PATH="$HOME/.anyenv/bin:$PATH" >> ~./zshrc'
 echo 'eval "$(anyenv init -)"' >> ~/.zshrc
 
 anyenv install plenv
