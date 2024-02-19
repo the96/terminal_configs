@@ -35,7 +35,7 @@ cpanm String::CamelCase
 
 echo '=== setup gh ==='
 brew install gh
-brew auth login
+gh auth login
 
 echo '=== install docker and colima ==='
 brew install docker colima
@@ -44,3 +44,5 @@ echo 'start and edit config file > `colima start --edit`'
 echo 'install docker compose'
 echo 'for mac: https://zenn.dev/redgosho/articles/ee2bd023a946a2'
 echo 'https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/'
+
+source ~/.zshrc

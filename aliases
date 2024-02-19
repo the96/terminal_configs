@@ -26,3 +26,6 @@ alias min='(){ if [ $1 -le $2 ]; then echo $1; else echo $2; fi }'
 # csvを見たいときに使うやつ
 alias lesscsv='sed ":a; s/,,/, ,/g; ta"| column -s, -t | less -N -S '
 alias tailcsv='() { head -n1 $1; tail $1 }'
+
+# seq 5 | join => 1 2 3 4 5
+alias join='awk '"'"'{if(a!=""){a=a" "$1}else{a=$1}}END{print a}'"'"''
