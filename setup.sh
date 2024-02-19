@@ -28,6 +28,11 @@ anyenv install rbenv
 anyenv install nodenv
 exec $SHELL -l
 
+plenv install 5.38.2
+plenv global 5.38.2
+cpan App::cpanminus
+cpanm String::CamelCase
+
 echo '=== setup gh ==='
 brew install gh
 brew auth login
