@@ -38,9 +38,7 @@ brew install gh
 gh auth login
 
 echo '=== install docker and colima ==='
-brew install docker colima
-echo 'colima config file > $HOME/.colima/default/colima.yaml'
-echo 'start and edit config file > `colima start --edit`'
+brew install docker
 echo 'install docker compose'
 echo 'for mac: https://zenn.dev/redgosho/articles/ee2bd023a946a2'
 echo 'https://matsuand.github.io/docs.docker.jp.onthefly/compose/install/'

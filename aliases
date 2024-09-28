@@ -13,6 +13,7 @@ alias range='(){ sed -n "$1,`expr $1 + $2 - 1`p" $3 }'
 # 引数に渡した文字列をcamelize / decamelizeする
 alias camelize="perl -E 'use String::CamelCase qw/camelize/; say camelize \$_ for @ARGV'"
 alias decamelize="perl -E 'use String::CamelCase qw/decamelize/; say decamelize \$_ for @ARGV'"
+alias upcase="ruby -e 'ARGF.each do |str| puts str.upcase end'"
 
 # パイプで渡した文字列をcamelize / decamelizeする
 # xargsは普通に使うとエイリアスが効かないのでそれ用
