@@ -1,0 +1,5 @@
+#!/bin/zsh
+
+alias web-exec="docker compose exec web"
+alias setup-db="docker compose exec web rails setup:db"
+alias routes="docker compose exec web rails routes"

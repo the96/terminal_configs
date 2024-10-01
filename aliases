@@ -30,3 +30,5 @@ alias tailcsv='() { head -n1 $1; tail $1 }'
 
 # seq 5 | join => 1 2 3 4 5
 alias join='awk '"'"'{if(a!=""){a=a" "$1}else{a=$1}}END{print a}'"'"''
+
+source $(dirname $0)/railsrc
