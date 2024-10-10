@@ -17,13 +17,57 @@ export NEXT_COMMAND_BGN_TIME
 # コマンドの実行時間をプロンプトに表示するやつ
 function show_command_end_time() {
   PREV_COMMAND_END_TIME=`date "+%H:%M:%S"`
-  PROMPT="%{$fg[green]%}%n%{$fg[white]%}(${PREV_COMMAND_END_TIME}) %{$fg[yellow]%}%~%{$reset_color%}$ "
-}
+  PATH_LEN=`pwd | wc -c`
+  WIDTH=`tput cols`
 
+  USER=`whoami`
+  PWD=`pwd | sed s@^/Users/$USER@~@g`
+  TEXT="$USER($PREV_COMMAND_END_TIME) $PWD"
+  RTEXT="[$GIT_CURRENT_REPOSITORY:$GIT_CURRENT_BRANCH]"
+
+  SUM_LEN=$(( ${#TEXT} + ${#RTEXT}))
+  SPACE_COUNT=$(( $WIDTH - $SUM_LEN ))
+
+  if [ $SPACE_COUNT -le 60 ]; then
+    RPROMPT=""
+    if [ $SPACE_COUNT -lt 0 ]; then
+      SPACE_COUNT=0
+    fi
+    SPACES=`seq -s ' ' 1 $SPACE_COUNT | sed -e 's/[0-9]//g'`
+    PROMPT="%{$fg[green]%}${USER}%{$fg[white]%}(${PREV_COMMAND_END_TIME}) %{$fg[yellow]%}${PWD}%{$reset_color%}$SPACES$RTEXT
+%{$fg[cyan]%}' ワ') %{$reset_color%}"
+  else  
+    PROMPT="%{$fg[green]%}%n%{$fg[white]%}(${PREV_COMMAND_END_TIME}) %{$fg[yellow]%}%~%{$fg[cyan]%} ' ワ') %{$reset_color%}"
+    RPROMPT=$RTEXT
+  fi
+}
 
 show_command_begin_time() {
   NEXT_COMMAND_BGN_TIME=`date "+%H:%M:%S"`
-  PROMPT="%{$fg[green]%}%n%{$fg[white]%}(${NEXT_COMMAND_BGN_TIME}) %{$fg[yellow]%}%~%{$reset_color%}$ "
+  PATH_LEN=`pwd | wc -c`
+  WIDTH=`tput cols`
+
+  USER=`whoami`
+  PWD=`pwd | sed s@^/Users/$USER@~@g`
+  TEXT="$USER($PREV_COMMAND_END_TIME) $PWD"
+
+  RTEXT="[$GIT_CURRENT_REPOSITORY:$GIT_CURRENT_BRANCH]"
+
+  SUM_LEN=`expr ${#TEXT} + ${#RTEXT}`
+  SPACE_COUNT=`expr $WIDTH - $SUM_LEN`
+
+  if [ $SPACE_COUNT -le 60 ]; then
+    RPROMPT=""
+    if [ $SPACE_COUNT -lt 0 ]; then
+      SPACE_COUNT=0
+    fi
+    SPACES=`seq -s ' ' 1 $SPACE_COUNT | sed -e 's/[0-9]//g'`
+    PROMPT="%{$fg[green]%}${USER}%{$fg[white]%}(${NEXT_COMMAND_BGN_TIME}) %{$fg[yellow]%}${PWD}%{$reset_color%}$SPACES$RTEXT
+%{$fg[cyan]%}' ワ') %{$reset_color%}"
+  else
+    PROMPT="%{$fg[green]%}%n%{$fg[white]%}(${NEXT_COMMAND_BGN_TIME}) %{$fg[yellow]%}%~%{$fg[cyan]%} ' ワ') %{$reset_color%}"
+    RPROMPT=$RTEXT
+  fi
   zle .accept-line
   zle .reset-prompt
 }
@@ -40,7 +84,7 @@ _set_env_git_current_branch() {
 }
 
 _update_rprompt () {
-    RPROMPT="[$GIT_CURRENT_REPOSITORY:$GIT_CURRENT_BRANCH]"
+    # RPROMPT="[$GIT_CURRENT_REPOSITORY:$GIT_CURRENT_BRANCH]"
 }
 
 zle -N accept-line show_command_begin_time
