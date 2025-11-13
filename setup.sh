@@ -37,7 +37,7 @@ echo '=== setup gh ==='
 brew install gh
 gh auth login
 
-echo '=== install docker and colima ==='
+echo '=== install docker ==='
 brew install docker
 echo 'install docker compose'
 echo 'for mac: https://zenn.dev/redgosho/articles/ee2bd023a946a2'

@@ -1,5 +1,7 @@
 #!/bin/zsh
 
 alias web-exec="docker compose exec web"
-alias setup-db="docker compose exec web rails setup:db"
+alias db-setup="docker compose exec web rails setup:db"
 alias routes="docker compose exec web rails routes"
+alias routes-web="open 'http://localhost:3000/rails/info/routes'"
+alias rails-c="docker compose exec web rails c"

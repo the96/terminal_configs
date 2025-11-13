@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-alias ls="ls --color=auto -GF"
+alias ls="ls -a --color=auto -GF"
 alias rename=rename-v
 alias grep='grep --color=always'
 alias tailf='tail -F'
